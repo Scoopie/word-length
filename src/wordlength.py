@@ -1,3 +1,4 @@
+#!/usr/bin/python
 """Parse a text file, and display words of the length specified."""
 
 import re, sys, argparse
@@ -31,8 +32,9 @@ __version__ = "0.9"
 
 #    return parser
 
-parser = argparse.ArgumentsParser(description='decription TODO..')
-parser.add_argument('--filename', metavar='f', type=string, help='the file to be processed')
+parser = argparse.ArgumentParser()
+parser.add_argument('filename', help='the file to be processed')
+parser.add_argument('length' , help='search for words with this many letters', type=int)
 # -----------------------------------------main -----------------------------------------------------------
 
 
