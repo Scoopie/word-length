@@ -1,4 +1,4 @@
 word-length
 ===========
 
-Display words of a certain length from a text file
+Display words of a specified length from a text file
