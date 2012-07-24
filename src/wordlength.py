@@ -10,7 +10,7 @@ __version__ = "0.9"
 #-------------------------------------- command-line options ----------------------------------------------------------
 parser = argparse.ArgumentParser()
 parser.add_argument('filename', help='the file to be processed')
-parser.add_argument('length_of_words_to_list' , help='search for words with this many letters', type=int)
+parser.add_argument('required_word_length' , help='search for words with this many letters', type=int)
 args = parser.parse_args()
 # -----------------------------------------main -----------------------------------------------------------
    
@@ -21,14 +21,15 @@ except:
    sys.exit(2)
 
 line = file.readline()
-count = 0
+number_of_words_found = 0
 words_of_correct_length = []
 
-if args.length_of_words_to_list < 1 or args.length_of_words_to_list > 100:
-   parser.error("Invalid word length entered,",repr(length_of_words_to_list))
+if args.required_word_length < 1 or args.required_word_length > 100:
+   parser.error("Invalid word length entered,",repr(required_word_length))
 
 
-# while not EOF
+# "if f.readline() returns an empty string, 
+# the end of the file has been reached, " - python docs
 while line != '':
    line = file.readline()
 
@@ -40,7 +41,7 @@ while line != '':
       words[i] = re.sub("[^A-Za-z]", "", words[i])
 
       # test to see if we have the correct number of characters
-      if len(words[i]) == args.length_of_words_to_list:
+      if len(words[i]) == args.required_word_length:
          words_of_correct_length.append(words[i].lower())
 
 file.close()
@@ -52,10 +53,10 @@ unique_words_of_correct_length = []
 for word in words_of_correct_length:
    if word not in unique_words_of_correct_length:
       unique_words_of_correct_length.append(word)
-      count = count + 1
+      number_of_words_found = number_of_words_found + 1
 
 # print the result
 for i in range(len(unique_words_of_correct_length)):
    print unique_words_of_correct_length[i]
-print
-print "Total words found", count
+
+print "\nTotal words found", number_of_words_found
