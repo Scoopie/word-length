@@ -3,10 +3,6 @@
 
 import re, sys, argparse
 
-# globals
-
-__version__ = "0.01"
-
 #-------------------------------------- command-line options ----------------------------------------------------------
 parser = argparse.ArgumentParser()
 parser.add_argument('filename', help='the file to be processed')
@@ -42,8 +38,6 @@ while True:
          words_of_correct_length.append(words[i].lower())
 
 file.close()
-# order list alphabetically
-words_of_correct_length.sort()
 
 # remove any duplicate entries
 unique_words_of_correct_length = []
@@ -51,6 +45,9 @@ for word in words_of_correct_length:
    if word not in unique_words_of_correct_length:
       unique_words_of_correct_length.append(word)
       number_of_words_found = number_of_words_found + 1
+
+# order list alphabetically
+unique_words_of_correct_length.sort()
 
 # print all matching words
 for i in range(len(unique_words_of_correct_length)):
