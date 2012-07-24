@@ -15,14 +15,14 @@ args = parser.parse_args()
 # -----------------------------------------main -----------------------------------------------------------
    
 try:
-   f = open(args.filename)
+   file = open(args.filename)
 except:
    print "Failed to open file"
    sys.exit(2)
 
-line = f.readline()
+line = file.readline()
 count = 0
-matches = []
+words_of_correct_length = []
 
 if args.length_of_words_to_list < 1 or args.length_of_words_to_list > 100:
    parser.error("Invalid word length entered,",repr(length_of_words_to_list))
@@ -30,7 +30,7 @@ if args.length_of_words_to_list < 1 or args.length_of_words_to_list > 100:
 
 # while not EOF
 while line != '':
-   line = f.readline()
+   line = file.readline()
 
    # split the line into words
    words = line.split()
@@ -41,21 +41,21 @@ while line != '':
 
       # test to see if we have the correct number of characters
       if len(words[i]) == args.length_of_words_to_list:
-         matches.append(words[i].lower())
+         words_of_correct_length.append(words[i].lower())
 
+file.close()
 # order list alphabetically
-matches.sort()
+words_of_correct_length.sort()
 
 # remove any duplicate entries
-unique = []
-for x in matches:
-   if x not in unique:
-      unique.append(x)
+unique_words_of_correct_length = []
+for word in words_of_correct_length:
+   if word not in unique_words_of_correct_length:
+      unique_words_of_correct_length.append(word)
       count = count + 1
 
 # print the result
-for i in range(len(unique)):
-   print unique[i]
+for i in range(len(unique_words_of_correct_length)):
+   print unique_words_of_correct_length[i]
 print
 print "Total words found", count
-f.close()
